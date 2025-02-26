@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oukadir <oukadir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 01:18:44 by oukadir           #+#    #+#             */
-/*   Updated: 2025/02/16 01:18:47 by oukadir          ###   ########.fr       */
+/*   Updated: 2025/02/20 23:47:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void print_stack(s_node **stack)
         printf("empty stack");
         return;
     }
-
     temp = *stack;
     while (temp)
     {

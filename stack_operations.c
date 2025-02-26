@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_operations.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oukadir <oukadir@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 04:56:07 by oukadir           #+#    #+#             */
-/*   Updated: 2025/02/14 01:36:16 by oukadir          ###   ########.fr       */
+/*   Updated: 2025/02/19 02:53:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void swap_both_stacks(s_node **stack_a, s_node **stack_b)
     swap_elements(stack_b);
 }
 
-void push_two_elements(s_node **stack_a, s_node **stack_b)
+void push_to_stack(s_node **stack_a, s_node **stack_b)
 {
     s_node *first_node;
     
