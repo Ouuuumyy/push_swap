@@ -33,27 +33,32 @@ void sort_stack_b_by_array(s_node **stack_a, s_node **stack_b, int size)
     start = 0;
     end = set_range(size) - 1;
     arr = extract_sorted_array(stack_a, size);
+
     if(!arr)
         return;
     while(*stack_a)
     {
         if (start >= size || end >= size)
-            break;
+        {
+                break;
+        }
         if((*stack_a)->value >= arr[start] && (*stack_a)->value <= arr[end])
         {
-            push_to_stack(stack_a, stack_b);
+            push_to_stack(stack_a, stack_b, 'b');
             start++;
-            end++;
+            if(end < size - 1)
+                end++;
         }
-        else if((*stack_a)->value < arr[start])
+        else if((*stack_a)->value <= arr[start])
         {
-            push_to_stack(stack_a, stack_b);
-            rotate_stack(stack_b);
+            push_to_stack(stack_a, stack_b, 'b');
+            rotate_stack(stack_b, 'b');
             start++;
-            end++;
+            if(end < size - 1)
+                end++;
         }
         else
-            rotate_stack(stack_a);
+            rotate_stack(stack_a, 'a');
     }
     free (arr);
 }
@@ -82,7 +87,7 @@ int find_largest_index(s_node **stack)
     return max_index;
 }
 
-void move_largest_to_top(s_node **stack)
+void move_largest_to_top(s_node **stack, char stack_name)
 {
     int size;
     int largest_index;
@@ -93,7 +98,7 @@ void move_largest_to_top(s_node **stack)
     {
         while(largest_index > 0)
         {
-            rotate_stack(stack);
+            rotate_stack(stack, stack_name);
             largest_index--;
         }
     }
@@ -101,7 +106,7 @@ void move_largest_to_top(s_node **stack)
     {
         while(largest_index < size)
         {
-            reverse_rotate_stack(stack);
+            reverse_rotate_stack(stack, stack_name);
             largest_index++;
         }
     }
@@ -115,7 +120,7 @@ void sort_large_stacks(s_node **stack_a, s_node **stack_b)
     sort_stack_b_by_array(stack_a, stack_b, size);
     while(*stack_b)
     {
-        move_largest_to_top(stack_b);
-        push_to_stack(stack_b, stack_a);
+        move_largest_to_top(stack_b, 'b');
+        push_to_stack(stack_b, stack_a, 'a');
     }
 }

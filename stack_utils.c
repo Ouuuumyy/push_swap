@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_func.c                                       :+:      :+:    :+:   */
+/*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 01:18:44 by oukadir           #+#    #+#             */
-/*   Updated: 2025/02/20 23:47:31 by marvin           ###   ########.fr       */
+/*   Updated: 2025/03/05 00:12:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void print_stack(s_node **stack)
 {
     s_node *temp;
 
-    if (!*stack)
-    {
-        printf("empty stack");
-        return;
-    }
+    // if (!*stack)
+    // {
+    //     printf("empty stack");
+    //     return;
+    // }
     temp = *stack;
     while (temp)
     {
@@ -47,17 +47,17 @@ void push(s_node **stack, int value)
     node = malloc(sizeof(s_node));
     if(!node)
         return;
-    node->next = *stack;
-    node->value = value;
-    *stack = node;
-}
-
-void pop(s_node **stack, s_node *node)
-{
     s_node *temp;
-
     temp = *stack;
-    *stack = temp->next;
-    free(temp);
+    
+    if(!*stack)
+        *stack = node;
+    else
+    {
+        while(temp->next)
+            temp = temp->next;
+        temp->next = node;
+    }
+    node->value = value;
+    node->next = NULL;
 }
-

@@ -4,7 +4,7 @@
 void sort_two(s_node **stack)
 {
     if ((*stack)->value > ((*stack)->next)->value)
-        swap_elements(stack);
+        swap_elements(stack, 'a');
 }
 
 s_node *min_node(s_node **stack)
@@ -59,12 +59,12 @@ void sort_three(s_node **stack)
         sort_two(&(*stack)->next);
     else if(mid->value == min->value)
     {
-        rotate_stack(stack);
+        rotate_stack(stack, 'a');
         sort_two(&(*stack)->next);
     }
     else if(third->value == min->value)
     {
-        reverse_rotate_stack(stack);
+        reverse_rotate_stack(stack, 'a');
         sort_two(&(*stack)->next);
     }
 }
@@ -75,17 +75,17 @@ void sort_four(s_node **stack_a, s_node **stack_b)
 
     min = min_node(stack_a);
     if((*stack_a)->next == min)
-        swap_elements(stack_a);
+        swap_elements(stack_a, 'a');
     else if((*stack_a)->next->next == min)
     {
-        rotate_stack(stack_a);
-        rotate_stack(stack_a);
+        rotate_stack(stack_a, 'a');
+        rotate_stack(stack_a, 'a');
     }
     else if((*stack_a)->next->next->next == min)
-        reverse_rotate_stack(stack_a);
-    push_to_stack(stack_a, stack_b);
+        reverse_rotate_stack(stack_a, 'a');
+    push_to_stack(stack_a, stack_b, 'b');
     sort_three(stack_a);
-    push_to_stack(stack_b, stack_a);
+    push_to_stack(stack_b, stack_a, 'a');
 }
 void sort_five(s_node **stack_a, s_node **stack_b)
 {
@@ -93,20 +93,34 @@ void sort_five(s_node **stack_a, s_node **stack_b)
 
     min = min_node(stack_a);
     if((*stack_a)->next == min)
-        swap_elements(stack_a);
+        swap_elements(stack_a, 'a');
     else if((*stack_a)->next->next == min)
     {
-        rotate_stack(stack_a);
-        rotate_stack(stack_a);
+        rotate_stack(stack_a, 'a');
+        rotate_stack(stack_a, 'a');
     }
     else if((*stack_a)->next->next->next == min)
     {
-        reverse_rotate_stack(stack_a);
-        reverse_rotate_stack(stack_a);
+        reverse_rotate_stack(stack_a, 'a');
+        reverse_rotate_stack(stack_a, 'a');
     }
     else if((*stack_a)->next->next->next->next == min)
-        reverse_rotate_stack(stack_a);
-    push_to_stack(stack_a, stack_b);
+        reverse_rotate_stack(stack_a, 'a');
+    push_to_stack(stack_a, stack_b, 'b');
     sort_four(stack_a, stack_b);
-    push_to_stack(stack_b, stack_a);
+    push_to_stack(stack_b, stack_a, 'a');
+}
+void sort_small_stacks(s_node **stack_a, s_node **stack_b)
+{
+    int size;
+
+    size = stack_size(*stack_a);
+    if(size == 2)
+        sort_two(stack_a);
+    else if(size == 3)
+        sort_three(stack_a);
+    else if(size == 4)
+        sort_four(stack_a, stack_b);
+    else if(size == 5)
+        sort_five(stack_a, stack_b);
 }
